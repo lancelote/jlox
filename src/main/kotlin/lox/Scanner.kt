@@ -45,14 +45,23 @@ class Scanner(private val source: String) {
             ' ', '\r', '\t' -> {}
             '\n' -> line++
             '"' -> string()
-            else -> {
-                if (char.isDigit()) {
-                    number()
-                } else {
-                    Lox.reportError(line, "unexpected character: $char")
-                }
+            else -> when {
+                char.isDigit() -> number()
+                char.isLetter() -> identifier()
+                else -> Lox.reportError(line, "unexpected character: $char")
             }
         }
+    }
+
+    private fun Char.isAlphaNumeric() = isLetterOrDigit() || this == '_'
+
+    private fun identifier() {
+        while (peek()?.isAlphaNumeric() == true) advance()
+
+        val text = source.substring(start, current)
+        val type = keywords.getOrDefault(text, IDENTIFIER)
+
+        addToken(type)
     }
 
     private fun number() {
@@ -108,4 +117,25 @@ class Scanner(private val source: String) {
     }
 
     private val isAtEnd get() = current >= source.length
+
+    companion object {
+         val keywords = mapOf(
+             "and" to AND,
+             "class" to CLASS,
+             "else" to ELSE,
+             "false" to FALSE,
+             "for" to FOR,
+             "fun" to FUN,
+             "if" to IF,
+             "nil" to NIL,
+             "or" to OR,
+             "print" to PRINT,
+             "return" to RETURN,
+             "super" to SUPER,
+             "this" to THIS,
+             "true" to TRUE,
+             "var" to VAR,
+             "while" to WHILE,
+        )
+    }
 }

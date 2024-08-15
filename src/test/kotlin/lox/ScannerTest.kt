@@ -98,4 +98,16 @@ class ScannerTest {
         )
         assertEquals(expectedTokens, tokens)
     }
+
+    @Test
+    fun `scanning keyword & identifier`() {
+        val scanner = Scanner("false falsehood")
+        val tokens = scanner.scanTokens()
+        val expectedTokens = listOf(
+            Token(FALSE, "false", null, 1),
+            Token(IDENTIFIER, "falsehood", null, 1),
+            Token(EOF, "", null, 1),
+        )
+        assertEquals(expectedTokens, tokens)
+    }
 }
