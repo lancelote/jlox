@@ -76,4 +76,26 @@ class ScannerTest {
         )
         assertEquals(expectedTokens, tokens)
     }
+
+    @Test
+    fun `scanning integer`() {
+        val scanner = Scanner("42")
+        val tokens = scanner.scanTokens()
+        val expectedTokens = listOf(
+            Token(NUMBER, "42", 42.0, 1),
+            Token(EOF, "", null, 1),
+        )
+        assertEquals(expectedTokens, tokens)
+    }
+
+    @Test
+    fun `scanning double`() {
+        val scanner = Scanner("12.34")
+        val tokens = scanner.scanTokens()
+        val expectedTokens = listOf(
+            Token(NUMBER, "12.34", 12.34, 1),
+            Token(EOF, "", null, 1),
+        )
+        assertEquals(expectedTokens, tokens)
+    }
 }

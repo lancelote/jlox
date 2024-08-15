@@ -45,9 +45,29 @@ class Scanner(private val source: String) {
             ' ', '\r', '\t' -> {}
             '\n' -> line++
             '"' -> string()
-            else -> Lox.reportError(line, "unexpected character: $char")
+            else -> {
+                if (char.isDigit()) {
+                    number()
+                } else {
+                    Lox.reportError(line, "unexpected character: $char")
+                }
+            }
         }
     }
+
+    private fun number() {
+        while (peek()?.isDigit() == true) advance()
+
+        if (peek() == '.' && peekNext()?.isDigit() == true) {
+            advance() // consume `.`
+
+            while (peek()?.isDigit() == true) advance()
+        }
+
+        addToken(NUMBER, source.substring(start, current).toDouble())
+    }
+
+    private fun peekNext() = source.getOrNull(current + 1)
 
     private fun string() {
         while (peek() != '"' && !isAtEnd) {
