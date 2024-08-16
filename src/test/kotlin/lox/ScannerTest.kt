@@ -110,4 +110,20 @@ class ScannerTest {
         )
         assertEquals(expectedTokens, tokens)
     }
+
+    @Test
+    fun `scanning multiline comment`() {
+        val scanner = Scanner("""
+            /* foo
+            bar
+            baz */
+            42
+        """.trimIndent())
+        val tokens = scanner.scanTokens()
+        val expectedTokens = listOf(
+            Token(NUMBER, "42", 42.0, 4),
+            Token(EOF, "", null, 4),
+        )
+        assertEquals(expectedTokens, tokens)
+    }
 }

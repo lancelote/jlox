@@ -34,13 +34,10 @@ class Scanner(private val source: String) {
             '=' -> addToken(if (match('=')) EQUAL_EQUAL else EQUAL)
             '<' -> addToken(if (match('=')) LESS_EQUAL else LESS)
             '>' -> addToken(if (match('=')) GREATER_EQUAL else GREATER)
-            '/' -> {
-                if (match('/')) {
-                    // a comment goes until the end of the line
-                    while (peek() != '\n' && !isAtEnd) advance()
-                } else {
-                    addToken(SLASH)
-                }
+            '/' -> when {
+                match('/') -> comment()
+                match('*') -> multiLineComment()
+                else -> addToken(SLASH)
             }
             ' ', '\r', '\t' -> {}
             '\n' -> line++
@@ -54,6 +51,26 @@ class Scanner(private val source: String) {
     }
 
     private fun Char.isAlphaNumeric() = isLetterOrDigit() || this == '_'
+
+    private fun comment() {
+        while (peek() != '\n' && !isAtEnd) advance()
+    }
+
+    private fun multiLineComment() {
+        while (peek() != '*' && peekNext() != '/' && !isAtEnd) {
+            if (peek() == '\n') line++
+            advance()
+        }
+
+        if (isAtEnd) {
+            Lox.reportError(line, "unterminated multiline comment")
+            return
+        }
+
+        // consume the closing `*/`
+        advance()
+        advance()
+    }
 
     private fun identifier() {
         while (peek()?.isAlphaNumeric() == true) advance()
