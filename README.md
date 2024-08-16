@@ -15,4 +15,15 @@ My implementation of `jlox` programming language from "[Crafting Interpreters][b
 * [ ] Chapter 12: Classes
 * [ ] Chapter 13: Inheritance
 
+## BNF
+
+```
+expression -> literal | unary | binary | grouping ;
+literal    -> NUMBER | STRING | "true" | "false" | "nil" ;
+grouping   -> "(" expression ")" ;
+unary      -> ( "-" | "!" ) expression ;
+binary     -> expression operator expression ;
+operator   -> "==" | "!=" | "<" | "<=" | ">" | ">=" | "+" | "-" | "*" | "/" ;
+```
+
 [book]: https://craftinginterpreters.com/
