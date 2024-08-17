@@ -25,9 +25,20 @@ fun BufferedWriter.writeLn(line: String) {
 }
 
 fun defineAst(baseName: String, fieldDeclarations: List<String>) {
-    val path = joinPath("$baseName.kt")
+    val path = joinPath("src", "main", "kotlin", "lox", "$baseName.kt")
     val file = File(path)
     val writer = file.bufferedWriter()
+
+    fun parseFieldDeclarations() = fieldDeclarations.associate { fd ->
+        val (left, right) = fd.split(":")
+        val className = left.trim()
+        className to right.trim().split(", ").associate {
+            val (name, type) = it.split(" ")
+            name to type
+        }
+    }
+
+    val dataClasses = parseFieldDeclarations()
 
     val lines = mutableListOf(
         "package lox",
@@ -47,16 +58,21 @@ fun defineAst(baseName: String, fieldDeclarations: List<String>) {
         lines.add("")
     }
 
-    fieldDeclarations.forEach { fieldDescription ->
-        val (left, right) = fieldDescription.split(":")
-        val className = left.trim()
-        val fields = right.trim().split(", ").associate {
-            val (name, type) = it.split(" ")
-            name to type
+    fun defineVisitor() {
+        lines.add("interface Visitor<T> {")
+
+        dataClasses.forEach { (className, _) ->
+            lines.add("    fun visit$className$baseName(${baseName.lowercase()}: $className): T")
         }
 
+        lines.add("}")
+    }
+
+    dataClasses.forEach { (className, fields) ->
         defineType(className, fields)
     }
+
+    defineVisitor()
 
     writer.use { out -> lines.forEach { out.writeLn(it) } }
 }

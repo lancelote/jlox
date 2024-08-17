@@ -20,3 +20,10 @@ data class Unary(
     val operator: Token,
     val right: Expr,
 ) : Expr()
+
+interface Visitor<T> {
+    fun visitBinaryExpr(expr: Binary): T
+    fun visitGroupingExpr(expr: Grouping): T
+    fun visitLiteralExpr(expr: Literal): T
+    fun visitUnaryExpr(expr: Unary): T
+}
