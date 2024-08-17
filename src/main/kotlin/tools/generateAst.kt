@@ -49,7 +49,7 @@ fun defineAst(baseName: String, fieldDeclarations: List<String>) {
 
     fun defineBase() {
         lines.add("abstract class $baseName {")
-        lines.add("    abstract fun <T> accept(visitor: Visitor<T>)")
+        lines.add("    abstract fun <T> accept(visitor: Visitor<T>): T")
         lines.add("}")
         lines.add("")
     }
@@ -61,7 +61,9 @@ fun defineAst(baseName: String, fieldDeclarations: List<String>) {
             lines.add("    val $key: $value,")
         }
 
-        lines.add(") : Expr()")
+        lines.add(") : Expr() {")
+        lines.add("    override fun <T> accept(visitor: Visitor<T>) = visitor.visit$className$baseName(this)")
+        lines.add("}")
         lines.add("")
     }
 
@@ -76,13 +78,10 @@ fun defineAst(baseName: String, fieldDeclarations: List<String>) {
     }
 
     defineHeader()
-
     defineBase()
-
     dataClasses.forEach { (className, fields) ->
         defineType(className, fields)
     }
-
     defineVisitor()
 
     writer.use { out -> lines.forEach { out.writeLn(it) } }
