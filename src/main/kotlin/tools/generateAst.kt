@@ -9,8 +9,7 @@ fun main(args: Array<String>) {
         System.err.println("usage: generate_ast <output directory>")
         exitProcess(64)
     }
-    val outputDir = args[0]
-    defineAst(outputDir, "Expr", listOf(
+    defineAst("Expr", listOf(
         "Binary   : left Expr, operator Token, right Expr",
         "Grouping : expression Expr",
         "Literal  : value Any?",
@@ -25,7 +24,7 @@ fun BufferedWriter.writeLn(line: String) {
     this.newLine()
 }
 
-fun defineAst(outputDir: String, baseName: String, fieldDeclarations: List<String>) {
+fun defineAst(baseName: String, fieldDeclarations: List<String>) {
     val path = joinPath("$baseName.kt")
     val file = File(path)
     val writer = file.bufferedWriter()
