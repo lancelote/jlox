@@ -40,12 +40,19 @@ fun defineAst(baseName: String, fieldDeclarations: List<String>) {
 
     val dataClasses = parseFieldDeclarations()
 
-    val lines = mutableListOf(
-        "package lox",
-        "",
-        "abstract class $baseName",
-        "",
-    )
+    val lines = mutableListOf<String>()
+
+    fun defineHeader() {
+        lines.add("package lox")
+        lines.add("")
+    }
+
+    fun defineBase() {
+        lines.add("abstract class $baseName {")
+        lines.add("    abstract fun <T> accept(visitor: Visitor<T>)")
+        lines.add("}")
+        lines.add("")
+    }
 
     fun defineType(className: String, fields: Map<String, String>) {
         lines.add("data class $className(")
@@ -67,6 +74,10 @@ fun defineAst(baseName: String, fieldDeclarations: List<String>) {
 
         lines.add("}")
     }
+
+    defineHeader()
+
+    defineBase()
 
     dataClasses.forEach { (className, fields) ->
         defineType(className, fields)

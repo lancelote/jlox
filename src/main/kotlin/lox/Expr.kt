@@ -1,6 +1,8 @@
 package lox
 
-abstract class Expr
+abstract class Expr {
+    abstract fun <T> accept(visitor: Visitor<T>)
+}
 
 data class Binary(
     val left: Expr,
