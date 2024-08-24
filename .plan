@@ -1,0 +1,28 @@
+Aug 25, 2024
+
+finish chapter 6
+implement remainder
+implement bitwise operations
+implement shift
+implement modulo
+implement conditional operators
+implement `for` loop with iterables
+read "the next 700 programming languages"
+make integers, booleans, etc. instances
+add string manipulation to standard library
+add trigonometric functions to standard library
+add file IO to standard library
+add networking to standard library
+add user input to standard library
+switch `print` from a keyword to a function
+write IDEA plugin for syntax highlighting
+read "a unified theory of GC"
+compile to web assembly (p. 17)
+implement optimizations (p. 15)
+implement different intermediate representation (p. 14)
+
+Old
+
+* update Gradle wrapper
+* set up tests on CI
+* add multiline comments
