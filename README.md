@@ -26,4 +26,14 @@ binary     -> expression operator expression ;
 operator   -> "==" | "!=" | "<" | "<=" | ">" | ">=" | "+" | "-" | "*" | "/" ;
 ```
 
+# Precedence
+
+| name       | operators         | associates |
+|------------|-------------------|------------|
+| equality   | `==` `!=`         | left       |
+| comparison | `>` `>=` `<` `<=` | left       |
+| term       | `-` `+`           | left       |
+| factor     | `/` `*`           | left       |
+| unary      | `!` `-`           | right      |
+
 [book]: https://craftinginterpreters.com/
