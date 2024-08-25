@@ -48,7 +48,7 @@ class Lox {
         }
 
         private fun report(line: Int, where: String, message: String) {
-            System.err.println("[line $line] Error$where: $message")
+            System.err.println("[line $line] Error $where: $message")
             hadError = true
         }
     }
