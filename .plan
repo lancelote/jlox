@@ -1,5 +1,6 @@
 Aug 26, 2024
 
+* simplify parser test logic
 * add support for comma expressions in parser
 * reset `hadError` interpreter flag before each test
 * fix pointer incremental bug in parser `advance` routine

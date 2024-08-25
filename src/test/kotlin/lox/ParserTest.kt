@@ -6,45 +6,43 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class ParserTest : LoxTest() {
-    @Test
-    fun `basic expression`() {
-        val scanner = Scanner("1 + 2")
+    private fun parseToExpr(source: String): Expr? {
+        val scanner = Scanner(source)
         val tokens = scanner.scanTokens()
         val parser = Parser(tokens)
-        val expr = parser.parse()!!
+        return parser.parse()
+    }
 
-        assertEquals("(+ 1.0 2.0)", AstPrinter().print(expr))
+    private fun assertParseFailure(source: String) {
+        val expr = parseToExpr(source)
+
+        assertTrue(Lox.hadError)
+        assertNull(expr)
+    }
+
+    private fun assertParsePrint(expected: String, source: String) {
+        val expr = parseToExpr(source)!!
+
+        assertEquals(expected, AstPrinter().print(expr))
+    }
+
+    @Test
+    fun `basic expression`() {
+        assertParsePrint("(+ 1.0 2.0)", "1 + 2")
     }
 
     @Test
     fun `parse unclosed parenthesis`() {
-        val scanner = Scanner("(")
-        val tokens = scanner.scanTokens()
-        val parser = Parser(tokens)
-        val expr = parser.parse()
-
-        assertTrue(Lox.hadError)
-        assertNull(expr)
+        assertParseFailure("(")
     }
 
     @Test
     fun `parse wrong syntax`() {
-        val scanner = Scanner("* 42")
-        val tokens = scanner.scanTokens()
-        val parser = Parser(tokens)
-        val expr = parser.parse()
-
-        assertTrue(Lox.hadError)
-        assertNull(expr)
+        assertParseFailure("* 42")
     }
 
     @Test
     fun `parse comma operator`() {
-        val scanner = Scanner("1, 2")
-        val tokens = scanner.scanTokens()
-        val parser = Parser(tokens)
-        val expr = parser.parse()!!
-
-        assertEquals("(, 1.0 2.0)", AstPrinter().print(expr))
+        assertParsePrint("(, 1.0 2.0)", "1, 2")
     }
 }
