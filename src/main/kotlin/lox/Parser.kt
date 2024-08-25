@@ -5,6 +5,12 @@ import lox.TokenType.*
 class Parser(val tokens: List<Token>) {
     private var current = 0
 
+    fun parse(): Expr? = try {
+        expression()
+    } catch (e: ParserError) {
+        null
+    }
+
     private fun expression(): Expr = equality()
 
     private fun equality(): Expr {
@@ -76,6 +82,7 @@ class Parser(val tokens: List<Token>) {
                 consume(RIGHT_PAREN, "expect `)` after expression")
                 Grouping(expr)
             }
+
             else -> throw error(peek(), "expression expected")
         }
     }
