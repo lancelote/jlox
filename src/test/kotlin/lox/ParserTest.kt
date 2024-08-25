@@ -45,4 +45,9 @@ class ParserTest : LoxTest() {
     fun `parse comma operator`() {
         assertParsePrint("(, 1.0 2.0)", "1, 2")
     }
+
+    @Test
+    fun `simple operator precedence`() {
+        assertParsePrint("(+ 1.0 (* 2.0 3.0))", "1 + 2 * 3")
+    }
 }

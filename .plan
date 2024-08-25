@@ -1,5 +1,6 @@
 Aug 26, 2024
 
+* add a test for operator precedence
 * simplify parser test logic
 * add support for comma expressions in parser
 * reset `hadError` interpreter flag before each test
