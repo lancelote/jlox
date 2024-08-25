@@ -1,5 +1,9 @@
 Aug 26, 2024
 
+add support for ternary operator
+add error for binary operators without left operand
+add synchronization to the parser
+
 * add a test for operator precedence
 * simplify parser test logic
 * add support for comma expressions in parser
@@ -7,15 +11,12 @@ Aug 26, 2024
 * fix pointer incremental bug in parser `advance` routine
 * add parser into the interpreter
 * add parse routine
-add synchronization to the parser
 * add tests for the parser
 * implement basic parser
 * add synchronization routine
 
 Aug 25, 2024
 
-* update grammar to take into account precedence
-* document operator precedence
 finish chapter 6
 implement remainder
 implement bitwise operations
@@ -36,6 +37,9 @@ read "a unified theory of GC"
 compile to web assembly (p. 17)
 implement optimizations (p. 15)
 implement different intermediate representation (p. 14)
+
+* update grammar to take into account precedence
+* document operator precedence
 
 Old
 
