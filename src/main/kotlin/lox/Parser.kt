@@ -76,7 +76,7 @@ class Parser(val tokens: List<Token>) {
                 consume(RIGHT_PAREN, "expect `)` after expression")
                 Grouping(expr)
             }
-            else -> throw error(peek(), "unknown token")
+            else -> throw error(peek(), "expression expected")
         }
     }
 
