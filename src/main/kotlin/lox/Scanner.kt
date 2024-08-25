@@ -45,7 +45,7 @@ class Scanner(private val source: String) {
             else -> when {
                 char.isDigit() -> number()
                 char.isLetter() -> identifier()
-                else -> Lox.reportError(line, "unexpected character: $char")
+                else -> Lox.error(line, "unexpected character: $char")
             }
         }
     }
@@ -63,7 +63,7 @@ class Scanner(private val source: String) {
         }
 
         if (isAtEnd) {
-            Lox.reportError(line, "unterminated multiline comment")
+            Lox.error(line, "unterminated multiline comment")
             return
         }
 
@@ -102,7 +102,7 @@ class Scanner(private val source: String) {
         }
 
         if (isAtEnd) {
-            Lox.reportError(line, "unterminated string")
+            Lox.error(line, "unterminated string")
             return
         }
 

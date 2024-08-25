@@ -1,5 +1,6 @@
 package lox
 
+import lox.TokenType.*
 import java.io.File
 import kotlin.system.exitProcess
 
@@ -32,8 +33,16 @@ class Lox {
             }
         }
 
-        fun reportError(line: Int, message: String) {
+        fun error(line: Int, message: String) {
             report(line, "", message)
+        }
+
+        fun error(token: Token, message: String) {
+            if (token.type == EOF) {
+                report(token.line, "at end", message)
+            } else {
+                report(token.line, "at '${token.lexeme}'", message)
+            }
         }
 
         private fun report(line: Int, where: String, message: String) {
