@@ -12,10 +12,12 @@ class Lox {
         private fun runSource(source: String) {
             val scanner = Scanner(source)
             val tokens = scanner.scanTokens()
+            val parser = Parser(tokens)
+            val expr = parser.parse()
 
-            for (token in tokens) {
-                println(token)
-            }
+            if (hadError) return
+
+            println(AstPrinter().print(expr!!))
         }
 
         fun runFile(path: String) {
