@@ -111,6 +111,21 @@ class Parser(val tokens: List<Token>) {
         return previous()
     }
 
+    private fun synchronize() {
+        advance()
+
+        while (!isAtEnd) {
+            if (previous().type == SEMICOLON) return
+
+            when (peek().type) {
+                CLASS, FOR, FUN, IF, PRINT, RETURN, VAR, WHILE -> return
+                else -> {}
+            }
+
+            advance()
+        }
+    }
+
     private val isAtEnd get() = peek().type == EOF
 
     private fun peek() = tokens[current]
