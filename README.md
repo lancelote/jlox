@@ -23,7 +23,8 @@ equality   -> comparison ( ( "!=" | "==" ) comparison )* ;
 comparison -> term ( ( ">" | ">=" | "<" | "<=" ) term )* ;
 term       -> factor ( ( "-" | "+" ) factor )* ;
 factor     -> unary ( ( "/" | "*" ) unary )* ;
-unary      -> ( "!" | "-") unary | primary ;
+unary      -> ( "!" | "-") unary | comma ;
+comma      -> primary ( "," primary )* ;
 primary    -> NUMBER | STRING | "true" | "false" | "nil" | "(" expression ")" ;
 ```
 
@@ -36,5 +37,6 @@ primary    -> NUMBER | STRING | "true" | "false" | "nil" | "(" expression ")" ;
 | term       | `-` `+`           | left       |
 | factor     | `/` `*`           | left       |
 | unary      | `!` `-`           | right      |
+| comma      | `,`               | left       |
 
 [book]: https://craftinginterpreters.com/

@@ -1,3 +1,15 @@
+Aug 26, 2024
+
+* add support for comma expressions in parser
+* reset `hadError` interpreter flag before each test
+* fix pointer incremental bug in parser `advance` routine
+* add parser into the interpreter
+* add parse routine
+add synchronization to the parser
+* add tests for the parser
+* implement basic parser
+* add synchronization routine
+
 Aug 25, 2024
 
 * update grammar to take into account precedence

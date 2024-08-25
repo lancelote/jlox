@@ -68,7 +68,19 @@ class Parser(val tokens: List<Token>) {
             return Unary(operator, right)
         }
 
-        return primary()
+        return comma()
+    }
+
+    private fun comma(): Expr {
+        val expr = primary()
+
+        while (match(COMMA)) {
+            val operator = previous()
+            val right = primary()
+            return Binary(expr, operator, right)
+        }
+
+        return expr
     }
 
     private fun primary(): Expr {

@@ -37,4 +37,14 @@ class ParserTest : LoxTest() {
         assertTrue(Lox.hadError)
         assertNull(expr)
     }
+
+    @Test
+    fun `parse comma operator`() {
+        val scanner = Scanner("1, 2")
+        val tokens = scanner.scanTokens()
+        val parser = Parser(tokens)
+        val expr = parser.parse()!!
+
+        assertEquals("(, 1.0 2.0)", AstPrinter().print(expr))
+    }
 }
