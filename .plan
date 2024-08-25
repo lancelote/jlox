@@ -1,5 +1,7 @@
 Aug 25, 2024
 
+* update grammar to take into account precedence
+* document operator precedence
 finish chapter 6
 implement remainder
 implement bitwise operations
