@@ -114,7 +114,7 @@ class Parser(val tokens: List<Token>) {
     }
 
     private fun advance(): Token {
-        if (isAtEnd) current++
+        if (!isAtEnd) current++
         return previous()
     }
 
