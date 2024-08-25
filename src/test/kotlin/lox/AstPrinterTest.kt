@@ -4,7 +4,7 @@ import lox.TokenType.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class AstPrinterTest {
+class AstPrinterTest : LoxTest() {
     @Test
     fun `print without parsing`() {
         val expression = Binary(

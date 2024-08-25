@@ -6,7 +6,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import kotlin.test.assertFalse
 
-class ScannerTest {
+class ScannerTest : LoxTest() {
     @Test
     fun `basic scanner text`() {
         val scanner = Scanner("""

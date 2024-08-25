@@ -51,6 +51,10 @@ class Lox {
             System.err.println("[line $line] Error $where: $message")
             hadError = true
         }
+
+        fun reset() {
+            hadError = false
+        }
     }
 }
 
