@@ -50,4 +50,26 @@ class ParserTest : LoxTest() {
     fun `simple operator precedence`() {
         assertParsePrint("(+ 1.0 (* 2.0 3.0))", "1 + 2 * 3")
     }
+
+    @Test
+    fun `basic ternary`() {
+        assertParsePrint("(?: true 2.0 3.0)", "true ? 2 : 3")
+    }
+
+    @Test
+    fun `ternary comparison precedence`() {
+        assertParsePrint("(== 1.0 (?: 2.0 3.0 4.0))", "1 == 2 ? 3 : 4")
+    }
+
+    @Test
+    fun `ternary comparison grouping`() {
+        assertParsePrint("(?: (group (== 1.0 2.0)) 3.0 4.0)", "(1 == 2) ? 3 : 4")
+    }
+
+    @Test
+
+    fun `ternary argument grouping`() {
+        val expected = "(?: true (group (+ 1.0 2.0)) (group (- 3.0 4.0)))"
+        assertParsePrint(expected, "true ? (1 + 2) : (3 - 4)")
+    }
 }

@@ -1,6 +1,9 @@
+Sep 1, 2024
+
+* add support for ternary operator
+
 Aug 26, 2024
 
-add support for ternary operator
 add error for binary operators without left operand
 add synchronization to the parser
 

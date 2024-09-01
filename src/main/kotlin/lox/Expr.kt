@@ -31,9 +31,18 @@ data class Unary(
     override fun <T> accept(visitor: Visitor<T>) = visitor.visitUnaryExpr(this)
 }
 
+data class Ternary(
+    val comparison: Expr,
+    val left: Expr,
+    val right: Expr,
+) : Expr() {
+    override fun <T> accept(visitor: Visitor<T>) = visitor.visitTernaryExpr(this)
+}
+
 interface Visitor<T> {
     fun visitBinaryExpr(expr: Binary): T
     fun visitGroupingExpr(expr: Grouping): T
     fun visitLiteralExpr(expr: Literal): T
     fun visitUnaryExpr(expr: Unary): T
+    fun visitTernaryExpr(expr: Ternary): T
 }

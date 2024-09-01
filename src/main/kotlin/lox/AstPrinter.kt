@@ -19,6 +19,10 @@ class AstPrinter : Visitor<String> {
         return parenthesize(expr.operator.lexeme, expr.right)
     }
 
+    override fun visitTernaryExpr(expr: Ternary): String {
+        return parenthesize("?:", expr.comparison, expr.left, expr.right)
+    }
+
     private fun parenthesize(name: String, vararg exprs: Expr) = buildString {
         append("($name")
         for (expr in exprs) {
