@@ -6,7 +6,7 @@ My implementation of `jlox` programming language from "[Crafting Interpreters][b
 
 * [x] Chapter 4: Scanning
 * [x] Chapter 5: Representing Code
-* [ ] Chapter 6: Parsing Expressions
+* [x] Chapter 6: Parsing Expressions
 * [ ] Chapter 7: Evaluating Expressions
 * [ ] Chapter 8: Statements and State
 * [ ] Chapter 9: Control Flow

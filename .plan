@@ -1,11 +1,17 @@
+ToDo
+
+add error for binary operators without left operand
+
+Oct 1, 2024
+
+* finish chapter 6
+* update Gradle wrapper to 8.10.2
+
 Sep 1, 2024
 
 * add support for ternary operator
 
 Aug 26, 2024
-
-add error for binary operators without left operand
-add synchronization to the parser
 
 * add a test for operator precedence
 * simplify parser test logic
@@ -20,7 +26,18 @@ add synchronization to the parser
 
 Aug 25, 2024
 
-finish chapter 6
+* update grammar to take into account precedence
+* document operator precedence
+
+Old
+
+* update Gradle wrapper
+* set up tests on CI
+* add multiline comments
+
+Backlog
+
+add synchronization to the parser
 implement remainder
 implement bitwise operations
 implement shift
@@ -40,12 +57,3 @@ read "a unified theory of GC"
 compile to web assembly (p. 17)
 implement optimizations (p. 15)
 implement different intermediate representation (p. 14)
-
-* update grammar to take into account precedence
-* document operator precedence
-
-Old
-
-* update Gradle wrapper
-* set up tests on CI
-* add multiline comments
